@@ -1,0 +1,360 @@
+name: Update CEMBench ASM and Activity Ratings
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-ratings:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update CEMBench ASM rating, activity ratings, and leaderboard
+        env:
+          CB001_URL: "https://script.google.com/macros/s/AKfycbx_mDzK93rJo_4NVPRBIYxQFRvatd9c2QEHpJSRx_y7BafuAPWIU1MryUVJ50MfOk5Z4w/exec"
+          CB002_URL: "https://script.google.com/macros/s/AKfycbyi6os1IJG1t92GvHucW6VEAJGSiEhlzkGB9chR6e2vuohXYDecEtv-2a46DiufOtgn/exec"
+          CB003_URL: "https://script.google.com/macros/s/AKfycby2xkSCE54PXRNvQY2AlfmGj5qeKMPqKFJ9Eynau1DNLxqA2l8uJsoUmDK2J_GUcmE/exec"
+          CB004_URL: "https://script.google.com/macros/s/AKfycbzlnezV2gE8CYHOcerdk2131xEzTxlxduIeQBgvuBtk_peNQuRD-8Zs-F8QdoR_JzYd/exec"  # Add CB-004 Apps Script /exec endpoint when available.
+          CEMBENCHASM_URL: ""  # Add CEMBench ASM User Feedback Apps Script /exec endpoint when deployed.
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import urllib.request
+          from pathlib import Path
+
+          BASE = Path("Course Materials")
+          INDEX = BASE / "Readme.md"
+          ROOT_README = Path("README.md")
+
+          activities = [
+              {
+                  "id": "CB-001",
+                  "url": os.environ["CB001_URL"],
+                  "readme": BASE / "CB-001" / "Readme.md",
+              },
+              {
+                  "id": "CB-002",
+                  "url": os.environ["CB002_URL"],
+                  "readme": BASE / "CB-002" / "Readme.md",
+              },
+              {
+                  "id": "CB-003",
+                  "url": os.environ["CB003_URL"],
+                  "readme": BASE / "CB-003" / "Readme.md",
+              },
+          ]
+
+          cb004_url = os.environ.get("CB004_URL", "").strip()
+          if cb004_url:
+              activities.append({
+                  "id": "CB-004",
+                  "url": cb004_url,
+                  "readme": BASE / "CB-004" / "Readme.md",
+              })
+
+          def fetch(url):
+              with urllib.request.urlopen(url) as response:
+                  return json.load(response)
+
+          def get_rating_value(data):
+              if "ratingValue" not in data:
+                  raise RuntimeError(
+                      f'{data["activity"]}: ratingValue missing from API.'
+                  )
+
+              return float(data["ratingValue"])
+
+          def public_rating(data):
+              responses = int(data["responses"])
+              rating = str(data["rating"])
+              stars = str(data["stars"])
+
+              if "#" in rating or "#" in stars:
+                  raise RuntimeError(
+                      f'{data["activity"]}: spreadsheet returned an error.'
+                  )
+
+              if responses < 10:
+                  return "Not yet rated"
+
+              return f"{stars} {rating} / 5"
+
+          def update_activity_readme(path, data):
+              responses = int(data["responses"])
+              rating = public_rating(data)
+
+              if responses < 10:
+                  block = (
+                      "<!-- RATING_START -->\n"
+                      "**Not yet rated**  \n"
+                      f"**Responses:** {responses}\n"
+                      "<!-- RATING_END -->"
+                  )
+              else:
+                  block = (
+                      "<!-- RATING_START -->\n"
+                      f"**{rating}**  \n"
+                      f"**Responses:** {responses}\n"
+                      "<!-- RATING_END -->"
+                  )
+
+              text = path.read_text(encoding="utf-8")
+
+              text, count = re.subn(
+                  r"<!-- RATING_START -->.*?<!-- RATING_END -->",
+                  block,
+                  text,
+                  flags=re.S,
+              )
+
+              if count != 1:
+                  raise RuntimeError(
+                      f"{path}: rating block not found."
+                  )
+
+              path.write_text(text, encoding="utf-8")
+
+          def update_index_row(text, activity_id, data):
+              lines = text.splitlines()
+              found = False
+
+              for i, line in enumerate(lines):
+                  if (
+                      line.startswith("|")
+                      and f"[{activity_id} —" in line
+                  ):
+                      cells = [
+                          c.strip()
+                          for c in line.split("|")[1:-1]
+                      ]
+
+                      if len(cells) != 6:
+                          raise RuntimeError(
+                              f"{activity_id}: expected 6 table columns."
+                          )
+
+                      cells[3] = public_rating(data)
+                      cells[4] = str(int(data["responses"]))
+
+                      lines[i] = "| " + " | ".join(cells) + " |"
+
+                      found = True
+                      break
+
+              if not found:
+                  raise RuntimeError(
+                      f"{activity_id}: activity table row not found."
+                  )
+
+              return "\n".join(lines) + "\n"
+
+          def get_activity_info(index_text, activity_id):
+              for line in index_text.splitlines():
+                  if (
+                      line.startswith("|")
+                      and f"[{activity_id} —" in line
+                  ):
+                      cells = [
+                          c.strip()
+                          for c in line.split("|")[1:-1]
+                      ]
+
+                      if len(cells) != 6:
+                          raise RuntimeError(
+                              f"{activity_id}: invalid activity table row."
+                          )
+
+                      return {
+                          "activity_cell": cells[0],
+                          "contributor": cells[2],
+                      }
+
+              raise RuntimeError(
+                  f"{activity_id}: could not read activity metadata."
+              )
+
+          def update_leaderboard(index_text, results):
+              eligible = [
+                  item for item in results
+                  if int(item["data"]["responses"]) >= 10
+              ]
+
+              eligible.sort(
+                  key=lambda item: (
+                      -get_rating_value(item["data"]),
+                      -int(item["data"]["responses"]),
+                      item["activity"]["id"],
+                  )
+              )
+
+              lines = [
+                  "| Rank | Activity | Rating | Responses | Contributor |",
+                  "|---:|---|---:|---:|---|",
+              ]
+
+              if not eligible:
+                  lines.append(
+                      "| — | No activity has reached the minimum "
+                      "number of responses yet. | — | — | — |"
+                  )
+              else:
+                  for rank, item in enumerate(eligible, start=1):
+                      activity_id = item["activity"]["id"]
+                      data = item["data"]
+                      info = get_activity_info(index_text, activity_id)
+
+                      lines.append(
+                          f"| {rank} "
+                          f"| {info['activity_cell']} "
+                          f"| {public_rating(data)} "
+                          f"| {int(data['responses'])} "
+                          f"| {info['contributor']} |"
+                      )
+
+              leaderboard = "\n".join(lines)
+
+              pattern = (
+                  r"<!-- LEADERBOARD_START -->"
+                  r".*?"
+                  r"<!-- LEADERBOARD_END -->"
+              )
+
+              replacement = (
+                  "<!-- LEADERBOARD_START -->\n"
+                  + leaderboard
+                  + "\n<!-- LEADERBOARD_END -->"
+              )
+
+              new_text, count = re.subn(
+                  pattern,
+                  replacement,
+                  index_text,
+                  flags=re.S,
+              )
+
+              if count != 1:
+                  raise RuntimeError(
+                      "Leaderboard markers not found in Course Materials/Readme.md."
+                  )
+
+              return new_text
+
+          def update_cembenchasm_readme(path, data):
+              responses = int(data["responses"])
+              rating = public_rating(data)
+
+              if responses < 10:
+                  block = (
+                      "<!-- CEMBENCHASM_RATING_START -->\n"
+                      "**Not yet rated**  \n"
+                      f"**Responses:** {responses}\n"
+                      "<!-- CEMBENCHASM_RATING_END -->"
+                  )
+              else:
+                  block = (
+                      "<!-- CEMBENCHASM_RATING_START -->\n"
+                      f"**{rating}**  \n"
+                      f"**Responses:** {responses}\n"
+                      "<!-- CEMBENCHASM_RATING_END -->"
+                  )
+
+              text = path.read_text(encoding="utf-8")
+
+              text, count = re.subn(
+                  r"<!-- CEMBENCHASM_RATING_START -->.*?<!-- CEMBENCHASM_RATING_END -->",
+                  block,
+                  text,
+                  flags=re.S,
+              )
+
+              if count != 1:
+                  raise RuntimeError(
+                      f"{path}: CEMBench ASM rating block not found."
+                  )
+
+              path.write_text(text, encoding="utf-8")
+
+          cembenchasm_url = os.environ.get("CEMBENCHASM_URL", "").strip()
+          if cembenchasm_url:
+              cembenchasm_data = fetch(cembenchasm_url)
+              print("CEMBENCHASM", cembenchasm_data)
+
+              if cembenchasm_data.get("activity") != "CEMBENCHASM":
+                  raise RuntimeError(
+                      "Endpoint mismatch for CEMBench ASM User Feedback."
+                  )
+
+              get_rating_value(cembenchasm_data)
+              update_cembenchasm_readme(ROOT_README, cembenchasm_data)
+          else:
+              print("CEMBENCHASM_URL is empty; skipping CEMBench ASM user rating update.")
+
+          index_text = INDEX.read_text(encoding="utf-8")
+          results = []
+
+          for activity in activities:
+              data = fetch(activity["url"])
+
+              print(activity["id"], data)
+
+              if data.get("activity") != activity["id"]:
+                  raise RuntimeError(
+                      f'Endpoint mismatch for {activity["id"]}.'
+                  )
+
+              get_rating_value(data)
+
+              update_activity_readme(
+                  activity["readme"],
+                  data
+              )
+
+              index_text = update_index_row(
+                  index_text,
+                  activity["id"],
+                  data
+              )
+
+              results.append({
+                  "activity": activity,
+                  "data": data,
+              })
+
+          index_text = update_leaderboard(
+              index_text,
+              results
+          )
+
+          INDEX.write_text(index_text, encoding="utf-8")
+
+          print("CEMBench ASM rating, activity ratings, and leaderboard updated successfully.")
+          PY
+
+      - name: Commit rating changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add "Course Materials/CB-001/Readme.md"
+          git add "Course Materials/CB-002/Readme.md"
+          git add "Course Materials/CB-003/Readme.md"
+          git add "Course Materials/CB-004/Readme.md"
+          git add "Course Materials/Readme.md"
+          git add "README.md"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Update CEMBench ASM and activity ratings"
+          git push
