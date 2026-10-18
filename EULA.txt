@@ -1,0 +1,118 @@
+CEMBENCH ASM END USER LICENSE AGREEMENT (EULA)
+Software Version 1.0.0 — EULA Revision 1.0 — 28 July 2026
+
+IMPORTANT — READ BEFORE INSTALLING OR USING THE SOFTWARE
+
+This End User License Agreement (the “Agreement”) is a legal agreement between the user and Prof. Dr. Selami Demir (the “Author” or “Licensor”), Professor at Yıldız Technical University, Department of Environmental Engineering. “Software” means CEMBench ASM, CEMBench ASM Template Editor, the signed model templates supplied with the public distribution, bundled add-ins, documentation, and related public release files. CEMBench ASM Signer is a private author tool and is not included in this public license.
+
+By installing, launching, copying, or using any part of the Software, the user confirms that this Agreement has been read, understood, and accepted. If the user does not accept every term, the Software must not be installed or used.
+
+1. BINARY-ONLY FREEWARE
+
+The Software is distributed free of charge as compiled, binary-only freeware. It is not open-source software, is not released into the public domain, and is not accompanied by source code. Free availability does not transfer ownership, copyright, authorship, trademark, distribution, modification, or commercial-use rights. All rights not expressly granted in this Agreement are reserved by Selami Demir.
+
+2. PERMITTED NON-COMMERCIAL USE
+
+Subject to this Agreement, the user is granted a limited, personal, non-exclusive, non-transferable, revocable license to install and use the Software without a license fee for:
+
+- undergraduate and graduate teaching and learning;
+- student assignments, theses, and dissertations;
+- non-commercial academic research and scientific evaluation;
+- preparation of the user’s own CEMBench ASM projects, CET/CBT templates, and academic outputs;
+- development and use of add-ins solely through the documented CEMBench ASM add-in API; and
+- use of Software-generated results in non-commercial academic publications, presentations, and educational materials, provided that the Software is appropriately identified.
+
+The user remains solely responsible for the scientific validity, suitability, interpretation, and independent verification of every model, input, assumption, configuration, calculation, output, report, and decision.
+
+3. COMMERCIAL USE PROHIBITED
+
+Commercial use requires prior written permission from Selami Demir. Prohibited commercial use includes, without limitation:
+
+- paid consulting, professional services, or customer work;
+- plant-specific modeling, calibration, design, verification, or operational advice performed for compensation;
+- use as part of a paid product, hosted service, training service, or subscription;
+- resale, rental, sublicensing, monetization, or paid redistribution of the Software; and
+- use of the Software or its outputs as a substitute for professionally verified design, regulatory, safety, or operational work supplied to a client.
+
+4. REDISTRIBUTION, MODIFICATION, AND REPRESENTATION
+
+The user may share the official CEMBench ASM download or release-page link. The user may not, without prior written permission:
+
+- redistribute the MSI, binaries, bundled files, templates, or documentation through another download, mirror, package, repository, or medium;
+- repackage, modify, patch, wrap, bundle, rename, or create altered binary distributions;
+- remove, hide, replace, or alter authorship, copyright, version, license, signature, or attribution information;
+- present CEMBench ASM, a modified copy, or a supplied template as the product of another person or organization;
+- sell or distribute a modified template as an official signed CEMBench ASM template; or
+- use the name CEMBench ASM in a manner that falsely suggests endorsement, certification, partnership, or official status.
+
+User-created templates and add-ins must be clearly identified as user-created and must not be represented as supplied, signed, validated, certified, or endorsed by Selami Demir unless written authorization has been given.
+
+5. REVERSE ENGINEERING PROHIBITED
+
+The user may not reverse engineer, decompile, disassemble, decode, translate, derive or attempt to derive source code, inspect or reconstruct internal algorithms or data structures, bypass or circumvent technical protections or digital-signature mechanisms, extract private or embedded signing material, or create modified binary versions or derivative software based on the Software.
+
+This prohibition does not restrict ordinary use of documented CEMBench ASM features, the documented add-in API, documented JSON snapshots supplied to add-ins, user-created CET/CBT templates, or normal exported files.
+
+6. SIGNED TEMPLATES
+
+A valid CEMBench ASM signature identifies a template package recognized by CEMBench ASM and helps establish package integrity and origin. A signature is not a guarantee of scientific validity, calibration quality, regulatory compliance, numerical convergence, error-free operation, suitability for a particular plant, or fitness for any purpose. The user must independently review every template and every result before relying on it.
+
+7. USER-CREATED CONTENT AND THIRD-PARTY ADD-INS
+
+The user retains rights in the user’s original data, projects, templates, add-ins, reports, and other original content, subject to the Author’s rights in CEMBench ASM, its interfaces, file structures, supplied templates, documentation, and other protected material.
+
+Third-party add-ins are separate software. They are not supplied, approved, validated, supported, or warranted by Selami Demir unless expressly identified as bundled by an official CEMBench ASM release. Add-ins may execute code and access project data. The user must install only trusted add-ins and assumes all risks arising from their installation or use. The Author is not responsible for third-party add-ins, their calculations, exports, security, compatibility, conduct, or consequences.
+
+8. AUTHORSHIP AND AI-ASSISTED DEVELOPMENT
+
+CEMBench ASM was conceived, designed, scientifically specified, directed, reviewed, tested, and released by Prof. Dr. Selami Demir. He is the sole author and developer of the product concept and retains final authority over its architecture, scientific scope, functional requirements, user experience, validation criteria, and release decisions.
+
+ChatGPT was used extensively as an AI-assisted development tool, including for code generation, code revision, debugging assistance, technical analysis, and documentation drafting. All AI-assisted material was directed, reviewed, selected, integrated, tested, and accepted by Selami Demir. ChatGPT and OpenAI are not licensors, publishers, sponsors, scientific validators, technical-support providers, or parties to this Agreement.
+
+This authorship statement identifies the origin, creative direction, and development control of CEMBench ASM. It does not constitute a warranty, representation of fitness, or acceptance of liability for the installation, use, interpretation, or consequences of the Software.
+
+9. TECHNICAL SUPPORT, BUG REPORTS, AND UPDATES
+
+The Software is provided free of charge. Individual technical support, project setup, model preparation, calibration assistance, result interpretation, and project-specific assistance are not provided. Users should consult the User Manual and release notes.
+
+Bug reports may be submitted through the official CEMBench ASM issue tracker. Reports may be reviewed and consolidated in batches. No individual reply, status update, investigation, correction, workaround, update, maintenance release, or response time is promised. The Author may modify, suspend, discontinue, replace, or update the Software at any time or may issue no updates at all.
+
+10. NO WARRANTY — AS IS, AS AVAILABLE, AND WITH ALL FAULTS
+
+The Software is provided free of charge, “AS IS,” “AS AVAILABLE,” and “WITH ALL FAULTS,” without warranties, promises, representations, or conditions of any kind, express, implied, statutory, or otherwise. Without limitation, no warranty is given regarding:
+
+- correctness, accuracy, completeness, reproducibility, reliability, or scientific validity;
+- numerical convergence, stability, performance, availability, or error-free operation;
+- merchantability, quality, fitness for a particular purpose, or non-infringement;
+- compatibility with any computer, operating system, data, model, template, add-in, or future release;
+- preservation, confidentiality, security, recovery, or integrity of data;
+- suitability for education, research, design, calibration, operation, regulatory compliance, safety, or any plant-specific application; or
+- any simulation, sensitivity, calibration, verification, design-check, spreadsheet, PDF, chart, signed-template, or add-in result.
+
+Installation and use are entirely voluntary and at the user’s sole risk. The user must independently verify all results and maintain appropriate backups. The Software must not be treated as the sole basis for design, construction, operation, compliance, safety, financial, environmental, or other consequential decisions.
+
+11. LIMITATION OF LIABILITY
+
+To the maximum extent that exclusion of liability is legally enforceable, Selami Demir shall have no responsibility or liability for any claim, loss, damage, cost, expense, obligation, or consequence arising from or related to the Software, including installation, launch, use, inability to use, uninstallation, modification, output, interpretation, reliance, or distribution.
+
+This exclusion includes, without limitation, direct, indirect, incidental, special, exemplary, punitive, and consequential damages; personal injury; environmental harm; plant malfunction; design or operational error; regulatory non-compliance; business interruption; lost profit, opportunity, reputation, or research time; computer failure; security incident; corrupted, disclosed, or lost data; and claims by customers, employers, students, institutions, authorities, or other third parties.
+
+The user assumes full responsibility for deciding whether to install or use the Software and for every use made of it. If the user is unwilling to assume these risks, the Software must not be installed or used.
+
+12. TERMINATION
+
+The license granted by this Agreement terminates automatically upon any material breach. Material breach includes, without limitation, prohibited commercial use, unauthorized redistribution or repackaging, reverse engineering, circumvention of signatures or protections, removal or falsification of authorship or license information, or representation of the Software or an altered template as an authorized product of another person or organization.
+
+Upon termination, the user must immediately stop using the Software, uninstall all copies under the user’s control, stop any unauthorized distribution, and delete unauthorized modified packages. Termination does not affect the Author’s ownership or any provisions that by their nature continue after termination, including authorship, intellectual-property protection, warranty disclaimer, limitation of liability, and restrictions on unauthorized distribution.
+
+13. ENTIRE AGREEMENT AND SEVERABILITY
+
+This Agreement constitutes the complete license terms for the public Software release unless Selami Demir provides a separate written agreement. If any provision is held invalid or unenforceable, the remaining provisions remain in effect to the greatest extent possible. Failure to enforce a provision on one occasion does not waive the right to enforce it later.
+
+14. ACCEPTANCE
+
+Installing, launching, copying, or using the Software constitutes acceptance of this Agreement. If these terms are not accepted, do not install or use the Software.
+
+Copyright © 2026 Selami Demir. All rights reserved.
+Licensor and Author: Prof. Dr. Selami Demir
+Professor, Yıldız Technical University, Department of Environmental Engineering

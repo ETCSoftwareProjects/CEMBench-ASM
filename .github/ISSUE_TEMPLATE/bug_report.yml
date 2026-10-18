@@ -1,0 +1,112 @@
+name: Bug report
+description: Report a reproducible CEMBench ASM software problem
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a reproducible CEMBench ASM problem.
+
+        Do not include confidential, personal, institution-restricted, or plant-specific information.
+
+        This issue tracker is not intended for project preparation, model calibration, result interpretation, or individual technical support.
+
+  - type: input
+    id: version
+    attributes:
+      label: CEMBench ASM version
+      description: Enter the exact version shown by the application or installer.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: application
+    attributes:
+      label: Affected application or module
+      options:
+        - CEMBench ASM
+        - CEMBench ASM Template Editor
+        - Installer or uninstaller
+        - Verification Report add-in
+        - CBT or CBM file handling
+        - Result export
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 64-bit"
+    validations:
+      required: true
+
+  - type: input
+    id: template
+    attributes:
+      label: Template and project
+      description: Identify the template and the general project configuration.
+      placeholder: "Introductory CNP Removal; modified UCT topology"
+    validations:
+      required: false
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem description
+      description: Describe the software problem clearly and precisely.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: List the exact steps needed to reproduce the problem.
+      placeholder: |
+        1. Open...
+        2. Select...
+        3. Enter...
+        4. Click...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: State what you expected CEMBench ASM to do.
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: State what actually happened, including the complete error message.
+    validations:
+      required: true
+
+  - type: textarea
+    id: attachments
+    attributes:
+      label: Screenshots and non-confidential files
+      description: Drag screenshots or non-confidential example files here when required.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have removed confidential, personal, institution-restricted, and plant-specific information.
+          required: true
+        - label: I have provided reproducible steps rather than a general modeling or technical-support request.
+          required: true
+        - label: I have checked the existing open and closed issues for the same problem.
+          required: true

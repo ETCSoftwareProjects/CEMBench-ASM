@@ -1,0 +1,73 @@
+name: Feature request
+description: Suggest a CEMBench ASM capability or workflow improvement
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggestions are evaluated according to their scientific relevance, educational value, compatibility, implementation requirements, and potential effects on existing projects and templates.
+
+        Submission does not guarantee implementation or a future release.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - CEMBench ASM workspace and topology
+        - Steady-state simulation
+        - Dynamic simulation
+        - Separator or aeration modeling
+        - Sensitivity analysis or PCA
+        - Calibration
+        - CEMBench ASM Template Editor
+        - Reporting or export
+        - Documentation
+        - Installer or deployment
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: need
+    attributes:
+      label: Scientific, educational, or workflow need
+      description: Explain the problem or limitation that motivates the suggestion.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe how the requested capability should work.
+    validations:
+      required: true
+
+  - type: textarea
+    id: value
+    attributes:
+      label: Expected value
+      description: Explain its scientific, educational, usability, or reproducibility benefit.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Current workaround or alternatives
+      description: Describe any existing workaround or alternative approach.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have checked the existing issues for a similar suggestion.
+          required: true
+        - label: This request does not contain confidential or plant-specific information.
+          required: true
