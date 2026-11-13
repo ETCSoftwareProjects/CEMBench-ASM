@@ -193,4 +193,4 @@ The public rating will be added after sufficient user feedback has been collecte
 
 If you have completed or reviewed this activity, please provide feedback:
 
-[Rate CB-004]({{FORM_URL}})
+[Rate CB-004](https://docs.google.com/forms/d/e/1FAIpQLSdB4x-vvC8dEnMk8E2Eqhb-f_mgZaspf3pkmwba7re8KyAzsA/viewform?usp=publish-editor)
