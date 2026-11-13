@@ -8,12 +8,12 @@ Users who complete or review an activity are encouraged to submit the short feed
 
 ## Activities
 
-| Activity | Topic | Rating | Responses |
-|---|---|---:|---:|
-| [CB-001 — Think you don't need a clarifier?](./CB-001/) | Need for secondary clarification and biomass retention | Not yet rated | 0 |
-| [CB-002 — How long is long enough?](./CB-002/) | Hydraulic retention time and substrate removal | Not yet rated | 0 |
-| [CB-003 — Wait... sludge has an age?](./CB-003/) | Sludge retention time and waste solids production | Not yet rated | 0 |
-| [CB-004 — Where did the puppies go, man?](./CB-004/) | Model yield, observed yield, and biomass decay | Not yet rated | 0 |
+| Activity | Topic | Contributor | Rating | Responses | Feedback |
+|---|---|---|---:|---:|---|
+| [CB-001 — Think you don't need a clarifier?](./CB-001/) | Need for secondary clarification and biomass retention | **Selami Demir** | Not yet rated | 0 | [Rate CB-001](https://docs.google.com/forms/d/e/1FAIpQLSd-fvzFPO2sYr0FNLKhnR3-aXxAxvOvfE0AztIXEI8Z9IXzCQ/viewform?usp=dialog) |
+| [CB-002 — How long is long enough?](./CB-002/) | Hydraulic retention time and substrate removal | **Selami Demir** | Not yet rated | 0 | [Rate CB-002](https://docs.google.com/forms/d/e/1FAIpQLSdEWdjYdo1Dn3PcOmkneriFf8klX7Rd4UgKoWMOXoyIsSizWA/viewform?usp=dialog) |
+| [CB-003 — Wait... sludge has an age?](./CB-003/) | Sludge retention time and waste solids production | **Neslihan Manav Demir** | Not yet rated | 0 | [Rate CB-003](https://docs.google.com/forms/d/e/1FAIpQLSdCkoK_zYYbT5h1XP6rezsDGiKjLToXW3X0NXREQPaZFE3Gkg/viewform) |
+| [CB-004 — Where did the puppies go, man?](./CB-004/) | Model yield, observed yield, and biomass decay | **Neslihan Manav Demir** | Not yet rated | 0 | [Rate CB-004](https://docs.google.com/forms/d/e/1FAIpQLSdB4x-vvC8dEnMk8E2Eqhb-f_mgZaspf3pkmwba7re8KyAzsA/viewform?usp=publish-editor) |
 
 ## Activity Rating
 
