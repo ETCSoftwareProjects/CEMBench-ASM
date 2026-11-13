@@ -132,4 +132,4 @@ The public rating will be added after sufficient user feedback has been collecte
 
 If you have completed or reviewed this activity, please provide feedback:
 
-[Rate CB-002]({{FORM_URL}})
+[Rate CB-002](https://docs.google.com/forms/d/e/1FAIpQLSdEWdjYdo1Dn3PcOmkneriFf8klX7Rd4UgKoWMOXoyIsSizWA/viewform)
